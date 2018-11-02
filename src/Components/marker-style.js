@@ -4,7 +4,8 @@ export default `
   display: inline-block;
   width: 8px;
   height: 8px;
-  background: red;
+  background: green;
+  background-image: url('../../Images/103614-200.png');
   border-radius: 8px;
   margin: 0 8px;
 }

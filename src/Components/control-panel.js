@@ -57,21 +57,19 @@ export default class ControlPanel extends PureComponent {
     const {settings, interactionState} = this.props;
 
     return (
-      <Container>
-        <h3>Limit Map Interaction</h3>
-        <p>Turn interactive features off/on.</p>
-        <div className="source-link">
-          <a href="https://github.com/uber/react-map-gl/tree/3.2-release/examples/interaction" target="_new">View Code ↗</a>
-        </div>
-        <hr />
+            <Container>
+          <h3>Limit Map Interaction</h3>
+          <p>Turn interactive features off/on.</p>
 
-        { Object.keys(settings).map(name => this._renderSetting(name, settings[name])) }
+          <hr />
 
-        <hr />
+          { Object.keys(settings).map(name => this._renderSetting(name, settings[name])) }
 
-        { this._renderInteractionStates(interactionState) }
+          <hr />
 
-      </Container>
+  {/* //     //   { this._renderInteractionStates(interactionState) } */}
+
+        </Container>
     );
   }
 }
