@@ -5,6 +5,7 @@ import MapGL, {Marker} from 'react-map-gl';
 import Geocoder from "react-map-gl-geocoder";
 import MARKER_STYLE from '../marker-style';
 import trails from '../trails.json';
+import API from '../../utils/API'
 // import ControlPanel from '../control-panel';
 
 // Ways to set Mapbox token: https://uber.github.io/react-map-gl/#/Documentation/getting-started/about-mapbox-tokens
@@ -19,7 +20,8 @@ class GeoMap extends Component {
         height: 100,
         latitude: 35.9940329,
         longitude:  -78.898619,
-        zoom: 8
+        zoom: 10,
+        trailsData: [],
       },
   }
   }
@@ -28,8 +30,18 @@ class GeoMap extends Component {
   componentDidMount() {
     window.addEventListener("resize", this._resize.bind(this));
     this._resize();
+    
   }
 
+//load saved trails
+loadTrails = () => {
+  API.searchTrails()
+    .then(res =>
+      this.setState({ trailsData: res.data })
+    )
+    .catch(err => console.log(err));
+};
+//resize viewport in UI
   _resize() {
     this._onViewportChange({
       width: 450,
@@ -39,11 +51,15 @@ class GeoMap extends Component {
 
   _onViewportChange = viewport => {
     this.setState({
-      viewport: { ...this.state.viewport, ...viewport }
+      viewport: { ...this.state.viewport, ...viewport },
+      latitude: {...this.state.viewport.latitude},
+      longitude: {...this.state.viewport.longitude},
     });
+    console.log(this.state.viewport)
+    this.loadTrails();
   };
    
-  
+  //Renders Hiking Marker
   _renderMarker(station, i) {
     const {name, latitude, longitude} = station;
     return (
