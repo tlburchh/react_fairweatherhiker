@@ -19,9 +19,19 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.0",
+    "webpack": "^4.20.0",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.0"
+  },
   "scripts": {
     "start": "react-scripts start",
+    "start-local": "webpack-dev-server --env.local --progress --hot --open",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

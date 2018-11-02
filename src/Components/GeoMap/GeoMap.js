@@ -1,9 +1,11 @@
 import "mapbox-gl/dist/mapbox-gl.css";
 import React, { Component } from "react";
-// import { render } from "react-dom";
-import MapGL from "react-map-gl";
+import {render} from 'react-dom';
+import MapGL, {Marker} from 'react-map-gl';
 import Geocoder from "react-map-gl-geocoder";
-import MapMarker from '../../Components/MapMarker/MapMarker';
+import MARKER_STYLE from '../marker-style';
+import bartStations from '../bart-station.json';
+import ControlPanel from '../control-panel';
 // Please be a decent human and don't abuse my Mapbox API token.
 // If you fork this sandbox, replace my API token with your own.
 // Ways to set Mapbox token: https://uber.github.io/react-map-gl/#/Documentation/getting-started/about-mapbox-tokens
@@ -42,6 +44,15 @@ class GeoMap extends Component {
       viewport: { ...this.state.viewport, ...viewport }
     });
   };
+  _renderMarker(station, i) {
+    const {name, coordinates} = station;
+    return (
+      <Marker key={i} longitude={coordinates[0]} latitude={coordinates[1]}
+        captureDrag={false} captureDoubleClick={false}>
+        <div className="station"><span>{name}</span></div>
+      </Marker>
+    );
+  }
 
   render() {
     return (
@@ -50,8 +61,14 @@ class GeoMap extends Component {
         {...this.state.viewport}
         onViewportChange={this._onViewportChange}
         mapboxApiAccessToken={MAPBOX_TOKEN}
+        mapStyle="mapbox://styles/mapbox/streets-v9"
       >
-          <MapMarker />
+          <style>{MARKER_STYLE}</style>
+        { bartStations.map(this._renderMarker) }
+        <ControlPanel containerComponent={this.props.containerComponent}
+          // settings={settings}
+          // interactionState={{...interactionState}}
+          onChange={this._onSettingChange} />
         <Geocoder mapRef={this.mapRef} onViewportChange={this._onViewportChange} mapboxApiAccessToken={MAPBOX_TOKEN} />
       </MapGL>
     );
