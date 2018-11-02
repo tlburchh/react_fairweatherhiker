@@ -1,0 +1,29 @@
+{
+  "name": "react-map-gl-geocoder-example",
+  "version": "1.0.0",
+  "description": "\nExample usage of react-map-gl-geocoder which is  a React wrapper for mapbox-gl-geocoder for use with react-map-gl",
+  "keywords": [
+    "react",
+    "mapbox-gl",
+    "mapbox-gl-geocoder",
+    "react-map-gl",
+    "mapbox"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@material-ui/core": "^3.3.2",
+    "react": "16.3.2",
+    "react-dom": "16.3.2",
+    "react-map-gl": "3.2.10",
+    "react-map-gl-geocoder": "1.3.2",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
