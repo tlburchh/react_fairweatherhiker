@@ -5,7 +5,7 @@ export default `
   width: 8px;
   height: 8px;
   background: green;
-  background-image: url('../../Images/103614-200.png');
+  // background-image: url('../Images/103614-200.png');
   border-radius: 8px;
   margin: 0 8px;
 }
