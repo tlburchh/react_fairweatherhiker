@@ -1,6 +1,6 @@
 import "mapbox-gl/dist/mapbox-gl.css";
 import React, { Component } from "react";
-import {render} from 'react-dom';
+// import {render} from 'react-dom';
 import MapGL, {Marker} from 'react-map-gl';
 import Geocoder from "react-map-gl-geocoder";
 import MARKER_STYLE from '../marker-style';
