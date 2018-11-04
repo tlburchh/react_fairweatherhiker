@@ -1,15 +1,25 @@
 import "mapbox-gl/dist/mapbox-gl.css";
 import React, { Component } from "react";
 // import {render} from 'react-dom';
-import MapGL, {Marker} from 'react-map-gl';
+import MapGL, {Marker, NavigationControl, Popup } from 'react-map-gl';
 import Geocoder from "react-map-gl-geocoder";
 import MARKER_STYLE from '../marker-style';
-import trails from '../trails.json';
+// import trails from '../trails.json';
 import API from '../../utils/API'
+// import Locator from '../Locator/Locator'
+// import ControlPanel from './control-panel';
+// import TrailPin from './TrailPin';
+// import NavControl from 'react-map-gl'
 // import ControlPanel from '../control-panel';
 
 // Ways to set Mapbox token: https://uber.github.io/react-map-gl/#/Documentation/getting-started/about-mapbox-tokens
 const MAPBOX_TOKEN = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
+const navStyle = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  padding: '10px'
+};
 
 class GeoMap extends Component {
   constructor(props) {
@@ -23,6 +33,7 @@ class GeoMap extends Component {
         zoom: 10,
         trailsData: [],
       },
+      popupInfo: null
   }
   }
   mapRef = React.createRef();
@@ -63,12 +74,35 @@ loadTrails = () => {
   _renderMarker(station, i) {
     const {name, latitude, longitude} = station;
     return (
-      <Marker key={i} longitude={longitude} latitude={latitude}
-        captureDrag={false} captureDoubleClick={false}>
+      <Marker 
+      key={i} 
+      longitude={longitude} 
+      latitude={latitude}
+      captureDrag={false} 
+      captureDoubleClick={false}>
+              {/* <TrailPin size={20} onClick={() => this.setState({popupInfo: station})}><span>{name}</span></TrailPin> */}
+
         <div className="station"><span>{name}</span></div>
       </Marker>
     );
   }
+  //Render popup for hiking marker
+  _renderPopup() {
+    const {popupInfo} = this.state;
+
+    return popupInfo && (
+      <Popup tipSize={5}
+        anchor="top"
+        longitude={popupInfo.longitude}
+        latitude={popupInfo.latitude}
+        onClose={() => this.setState({popupInfo: null})} >
+        {/* <CityInfo info={popupInfo} /> */}
+        <p>CHECK</p>
+      </Popup>
+    );
+  }
+
+
 
   render() {
     return (
@@ -79,8 +113,14 @@ loadTrails = () => {
         mapboxApiAccessToken={MAPBOX_TOKEN}
         mapStyle="mapbox://styles/mapbox/streets-v9"
       >
+      {/* <Locator /> */}
+        <div className="nav" style={navStyle}>
+          <NavigationControl onViewportChange={this._updateViewport} />
+        </div>
+        {/* <ControlPanel containerComponent={this.props.containerComponent} /> */}
           <style>{MARKER_STYLE}</style>
-        { trails.map(this._renderMarker) }
+        { this.state.viewport.trailsData.map(this._renderMarker) }
+        {this._renderPopup()}
   
         <Geocoder mapRef={this.mapRef} onViewportChange={this._onViewportChange} mapboxApiAccessToken={MAPBOX_TOKEN} />
       </MapGL>
