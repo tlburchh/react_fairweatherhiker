@@ -39,6 +39,7 @@ class GeoMap extends Component {
     this._resize();
     
   }
+  
 
 //load saved trails
 loadTrails = (latitude, longitude) => {
@@ -82,7 +83,7 @@ loadTrails = (latitude, longitude) => {
       captureDoubleClick={true}>
               {/* <TrailPin size={20} onClick={() => this.setState({popupInfo: station})}><span>{name}</span></TrailPin> */}
       {/* onClick={console.log('clicked')} */}
-        <div className="station" ><span>{name}</span></div>
+        <div className="station"><span>{name}</span></div>
       </Marker>
     );
   }
