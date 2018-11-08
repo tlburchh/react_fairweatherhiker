@@ -24,12 +24,14 @@ function Main(props) {
     <div className={classes.root}>
     <AppBar />
       <Grid container spacing={24}>
-        <Grid item xs={6}>
+      <Grid xs={1} sm={0} />
+        <Grid style={{paddingTop: 30}}>
+          <Paper>
           <GeoMap />
-          <Paper className={classes.paper}>Map
           </Paper>
         </Grid>
-        <Grid item xs={6}>
+       
+        <Grid style={{paddingTop: 30}} item xs={12} sm={6}>
           <Paper className={classes.paper}>xs=6</Paper>
         </Grid>
       </Grid>

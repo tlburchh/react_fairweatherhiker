@@ -80,7 +80,7 @@ loadTrails = (latitude, longitude) => {
       longitude={longitude} 
       latitude={latitude}
       captureDrag={false} 
-      captureDoubleClick={true}>
+      captureOnClick={true}>
               {/* <TrailPin size={20} onClick={() => this.setState({popupInfo: station})}><span>{name}</span></TrailPin> */}
       {/* onClick={console.log('clicked')} */}
         <div className="station"><span>{name}</span></div>
