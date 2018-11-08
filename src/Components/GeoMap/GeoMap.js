@@ -5,7 +5,7 @@ import MapGL, {Marker} from 'react-map-gl';
 import Geocoder from "react-map-gl-geocoder";
 import MARKER_STYLE from '../marker-style';
 // import trails from '../trails.json';
-import API from '../../utils/API'
+// import API from '../../utils/API'
 // import Locator from '../Locator/Locator'
 // import ControlPanel from './control-panel';
 // import TrailPin from './TrailPin';
@@ -27,10 +27,10 @@ class GeoMap extends Component {
         longitude:  -78.898619,
         zoom: 10,
       },
-      data: [],
+      // data: [],
     }
     console.log('trails')
-    console.log(this.state.data);
+    console.log(this.props.data);
   }
   mapRef = React.createRef();
 
@@ -41,18 +41,18 @@ class GeoMap extends Component {
   }
   
 
-//load saved trails
-loadTrails = (latitude, longitude) => {
-  API.searchTrails(latitude, longitude)
-    .then(res => {
-      console.log('SEARCH TRAILS RES ', res.data.trails);
+// load saved trails
+// loadTrails = (latitude, longitude) => {
+//   API.searchTrails(latitude, longitude)
+//     .then(res => {
+//       console.log('SEARCH TRAILS RES ', res.data.trails);
       
-      // console.log(data.trails);
-      this.setState({ data: res.data.trails })
-    }
-    )
-    .catch(err => console.log(err));
-};
+//       // console.log(data.trails);
+//       this.setState({ data: res.data.trails })
+//     }
+//     )
+//     .catch(err => console.log(err));
+// };
 //resize viewport in UI
   _resize() {
     this._onViewportChange({
@@ -67,7 +67,7 @@ loadTrails = (latitude, longitude) => {
       latitude: {...this.state.viewport.latitude},
       longitude: {...this.state.viewport.longitude},
     });
-    this.loadTrails(this.state.viewport.latitude, this.state.viewport.longitude);
+    this.props.loadTrails(this.state.viewport.latitude, this.state.viewport.longitude);
   };
    
   //Renders Hiking Marker
@@ -106,7 +106,7 @@ loadTrails = (latitude, longitude) => {
         </div> */}
         {/* <ControlPanel containerComponent={this.props.containerComponent} /> */}
           <style>{MARKER_STYLE}</style>
-        { this.state.data.map(this._renderMarker) }
+        { this.props.data.map(this._renderMarker) }
   
         <Geocoder mapRef={this.mapRef} onViewportChange={this._onViewportChange} mapboxApiAccessToken={MAPBOX_TOKEN} />
       </MapGL>
