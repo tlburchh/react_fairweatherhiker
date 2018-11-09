@@ -1,16 +1,12 @@
 import "mapbox-gl/dist/mapbox-gl.css";
 import React, { Component } from "react";
 // import {render} from 'react-dom';
-import MapGL, {Marker} from 'react-map-gl';
+import MapGL, {Marker, Popup} from 'react-map-gl';
 import Geocoder from "react-map-gl-geocoder";
 import MARKER_STYLE from '../marker-style';
 // import trails from '../trails.json';
 // import API from '../../utils/API'
-// import Locator from '../Locator/Locator'
-// import ControlPanel from './control-panel';
-// import TrailPin from './TrailPin';
-// import NavControl from 'react-map-gl'
-// import ControlPanel from '../control-panel';
+import Grid from '@material-ui/core/Grid';
 
 // Ways to set Mapbox token: https://uber.github.io/react-map-gl/#/Documentation/getting-started/about-mapbox-tokens
 const MAPBOX_TOKEN = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
@@ -27,10 +23,12 @@ class GeoMap extends Component {
         longitude:  -78.898619,
         zoom: 10,
       },
-      // data: [],
+      popupInfo: null,
+      trailData: [],
     }
-    console.log('trails')
-    console.log(this.props.data);
+    this._renderMarker = this._renderMarker.bind(this);
+    console.log('trailData')
+    console.log(this.state.trailData);
   }
   mapRef = React.createRef();
 
@@ -38,6 +36,15 @@ class GeoMap extends Component {
     window.addEventListener("resize", this._resize.bind(this));
     this._resize();
     
+  }
+  componentDidUpdate(prevProps) {
+    console.log('trails')
+    console.log(this.props.data);
+    if (this.props.data !== prevProps.data) {
+      this.setState({trailData: this.props.data})
+      console.log(this.state)
+    }
+    // this.setState({trailData: this.props.data})
   }
   
 
@@ -72,22 +79,38 @@ class GeoMap extends Component {
    
   //Renders Hiking Marker
   _renderMarker(station, i) {
-    const {name, summary, latitude, longitude} = station;
+    const {name, summary, latitude, longitude, trailData} = station;
     return (
       <Marker 
       key={i} 
       summary={summary}
       longitude={longitude} 
       latitude={latitude}
+      trailData={trailData}
       captureDrag={false} 
       captureOnClick={true}>
-              {/* <TrailPin size={20} onClick={() => this.setState({popupInfo: station})}><span>{name}</span></TrailPin> */}
+      <div className="station" onClick={this.props.handleTrailSelection} ><span>{name}</span></div>
+      {/* // onClick={() => this.setState({popupInfo: station})}><Grid>{name}</Grid>> */}
       {/* onClick={console.log('clicked')} */}
-        <div className="station"><span>{name}</span></div>
+        {/* <div onClick={ () => this.setState(this.state)} className="station"><span>{name}</span></div> */}
       </Marker>
     );
   }
   
+  _renderPopup() {
+    const {popupInfo} = this.props;
+
+    return popupInfo && (
+      <Popup tipSize={5}
+        anchor="top"
+        longitude={this.props.longitude}
+        latitude={this.props.latitude}
+        onClose={() => this.setState({popupInfo: 'check'})}>
+        
+        <Grid />
+      </Popup>
+    );
+  }
 
 
 
@@ -107,7 +130,7 @@ class GeoMap extends Component {
         {/* <ControlPanel containerComponent={this.props.containerComponent} /> */}
           <style>{MARKER_STYLE}</style>
         { this.props.data.map(this._renderMarker) }
-  
+        {this._renderPopup()}
         <Geocoder mapRef={this.mapRef} onViewportChange={this._onViewportChange} mapboxApiAccessToken={MAPBOX_TOKEN} />
       </MapGL>
     );

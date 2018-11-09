@@ -24,7 +24,8 @@ class Main extends Component  {
   constructor(props){
     super(props);
     this.state={
-      data: []
+      data: [],
+      selectedTrail: {},
     }
   }
 
@@ -32,7 +33,7 @@ class Main extends Component  {
 loadTrails = (latitude, longitude) => {
   API.searchTrails(latitude, longitude)
     .then(res => {
-      console.log('SEARCH TRAILS RES ', res.data.trails);
+      // console.log('SEARCH TRAILS RES ', res.data.trails);
       
       // console.log(data.trails);
       this.setState({ data: res.data.trails })
@@ -40,6 +41,11 @@ loadTrails = (latitude, longitude) => {
     )
     .catch(err => console.log(err));
 };
+
+handleTrailSelection = (event) =>{
+  this.setState({selectedTrail: event.target})
+  console.log('selected trail:', this.state.selectedTrail);
+}
 
   render() {
     const { classes } = this.props;
@@ -52,7 +58,7 @@ loadTrails = (latitude, longitude) => {
       <Grid item xs={1}/>
         <Grid style={{paddingTop: 30}}>
           <Paper>
-          <GeoMap data= {this.state.data} loadTrails={this.loadTrails}/>
+          <GeoMap data= {this.state.data} loadTrails={this.loadTrails} handleTrailSelection={this.handleTrailSelection}/>
           </Paper>
         </Grid>
        
