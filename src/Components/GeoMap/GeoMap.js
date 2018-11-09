@@ -79,14 +79,13 @@ class GeoMap extends Component {
    
   //Renders Hiking Marker
   _renderMarker(station, i) {
-    const {name, summary, latitude, longitude, trailData} = station;
+    const {name, summary, latitude, longitude} = station;
     return (
       <Marker 
       key={i} 
       summary={summary}
       longitude={longitude} 
       latitude={latitude}
-      trailData={trailData}
       captureDrag={false} 
       captureOnClick={true}>
       <div className="station" onClick={this.props.handleTrailSelection} ><span>{name}</span></div>
