@@ -1,5 +1,6 @@
 import "mapbox-gl/dist/mapbox-gl.css";
 import React, { Component } from "react";
+import { debounce } from 'lodash'
 // import {render} from 'react-dom';
 import MapGL, {Marker, Popup} from 'react-map-gl';
 import Geocoder from "react-map-gl-geocoder";
@@ -7,6 +8,7 @@ import MARKER_STYLE from '../marker-style';
 // import trails from '../trails.json';
 // import API from '../../utils/API'
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 
 // Ways to set Mapbox token: https://uber.github.io/react-map-gl/#/Documentation/getting-started/about-mapbox-tokens
 const MAPBOX_TOKEN = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
@@ -26,6 +28,7 @@ class GeoMap extends Component {
       popupInfo: null,
       trailData: [],
     }
+    this._onViewportChange = debounce(this._onViewportChange,1000)
     this._renderMarker = this._renderMarker.bind(this);
     console.log('trailData')
     console.log(this.state.trailData);
@@ -38,8 +41,8 @@ class GeoMap extends Component {
     
   }
   componentDidUpdate(prevProps) {
-    console.log('trails')
-    console.log(this.props.data);
+    // console.log('trails')
+    // console.log(this.props.data);
     if (this.props.data !== prevProps.data) {
       this.setState({trailData: this.props.data})
       console.log(this.state)
@@ -88,12 +91,15 @@ class GeoMap extends Component {
       latitude={latitude}
       captureDrag={false} 
       captureOnClick={true}>
-      <div className="station" onClick={this.props.handleTrailSelection} ><span>{name}</span></div>
+      <div className="station" ><span>
+      <Button style= {{background:'white'}} values={this.state.trailData} onClick={this.props.handleTrailSelection} >{name}</Button>
+      </span></div>
       {/* // onClick={() => this.setState({popupInfo: station})}><Grid>{name}</Grid>> */}
       {/* onClick={console.log('clicked')} */}
         {/* <div onClick={ () => this.setState(this.state)} className="station"><span>{name}</span></div> */}
       </Marker>
     );
+    // console.log('trail data: ' + this.state.trailData)
   }
   
   _renderPopup() {

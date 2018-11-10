@@ -26,12 +26,13 @@ class Main extends Component  {
     this.state={
       data: [],
       selectedTrail: {},
+      // traildata: [],
     }
   }
-
-//load saved trails
-loadTrails = (latitude, longitude) => {
-  API.searchTrails(latitude, longitude)
+  
+  //load saved trails
+  loadTrails = (latitude, longitude) => {
+    API.searchTrails(latitude, longitude)
     .then(res => {
       // console.log('SEARCH TRAILS RES ', res.data.trails);
       
@@ -40,11 +41,12 @@ loadTrails = (latitude, longitude) => {
     }
     )
     .catch(err => console.log(err));
-};
-
-handleTrailSelection = (event) =>{
-  this.setState({selectedTrail: event.target})
-  console.log('selected trail:', this.state.selectedTrail);
+  };
+  
+  handleTrailSelection = (event) =>{
+    this.setState({selectedTrail: event.target})
+    console.log('selected trail:', this.state.selectedTrail.find('{name}').text());
+    console.log('trail data main: ' + this.state)
 }
 
   render() {
