@@ -2,10 +2,10 @@ const router = require("express").Router();
 const postController = require("../../controllers/postController");
 
 
-router.post('/trails', postController.trails)
+router.post('/newTrail', postController.insertTrail)
 //Post notes about trails
 
-router.post('/notes', postController.notes)
+router.post('/newNote', postController.insertNote)
 
 
 module.exports = router;

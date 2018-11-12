@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const trailSchema = new Schema ({
   id: {
-    type: String,
+    type: Number,
     trim: true,
   },
   name: {
@@ -19,7 +19,7 @@ const trailSchema = new Schema ({
     trim: true,
   },
   stars: {
-    type: String,
+    type: Number,
     trim: true,
   }, 
   location: {
@@ -35,15 +35,15 @@ const trailSchema = new Schema ({
     trim: true,
   }, 
   length: {
-    type: String,
+    type: Number,
     trim: true,
   }, 
   longitude: {
-    type: String,
+    type: Number,
     trim: true,
   }, 
   latitude: {
-    type: String,
+    type: Number,
     trim: true,
   }
 
