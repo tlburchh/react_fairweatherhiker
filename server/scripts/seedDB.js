@@ -32,7 +32,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Hiker", { useNe
 
 //seed initial data
 db.Trails.deleteMany({}).then(
-  db.Trail.insertMany(trailsSeed).then(resp => {
+  db.Trails.insertMany(trailsSeed).then(resp => {
     console.log("Added trails: " + resp);
     ).catch(err => {
       console.log("Error inserting trails");

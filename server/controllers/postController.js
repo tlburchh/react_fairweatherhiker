@@ -4,6 +4,7 @@ const db = require("../models");
 module.exports = {
   insertTrail: (req, res) => {
     const newTrail = {
+        id: req.body.id,
         name: req.body.name,
         summary: req.body.summary,
         difficulty: req.body.difficulty,
@@ -29,6 +30,7 @@ module.exports = {
 
 insertNote: (req, res) => {
   const newNote = {
+
       name: req.body.name,
       note: req.body.summary,
 
