@@ -2,7 +2,7 @@ const db = require("../models");
 
 // Define methods for GETTING various data from the Users, Wines, etc collections
 module.exports = {
-  insert: (req, res) => {
+  insertTrail: (req, res) => {
     const newTrail = {
         name: req.body.name,
         summary: req.body.summary,
@@ -26,4 +26,25 @@ module.exports = {
         res.json({message: `Error adding new trail`});
     });
 },
+
+insertNote: (req, res) => {
+  const newNote = {
+      name: req.body.name,
+      note: req.body.summary,
+
+  };
+
+
+
+  db.Notes.insertMany(newNote).then(notesResp => {
+      console.log(`Inserted new trail: ${notesResp}`);
+
+  }).catch(err => {
+      console.log(`Error adding new note: ${err}`);
+      res.json({message: `Error adding new note`});
+  });
+},
+
+//add post for notes
 };
+
