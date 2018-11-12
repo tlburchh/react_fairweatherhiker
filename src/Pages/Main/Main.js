@@ -45,7 +45,7 @@ class Main extends Component  {
   
   handleTrailSelection = (event) =>{
     this.setState({selectedTrail: event.target})
-    console.log('selected trail:', this.state.selectedTrail.find('{name}').text());
+    console.log('selected trail:', this.state.selectedTrail)
     console.log('trail data main: ' + this.state)
 }
 

@@ -13,7 +13,17 @@
   "dependencies": {
     "@material-ui/core": "^3.3.2",
     "axios": "^0.18.0",
+    "bcrypt": "^3.0.2",
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^2.0.1",
     "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "if-env": "^1.0.4",
+    "mongoose": "^5.3.4",
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "lodash": "^4.17.11",
     "react": "16.3.2",
     "react-dom": "16.3.2",
@@ -28,6 +38,8 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.0",
+    "concurrently": "^3.5.0",
+    "nodemon": "^1.11.0",
     "webpack": "^4.20.0",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.0"
@@ -35,8 +47,20 @@
   "scripts": {
     "start": "react-scripts start",
     "start-local": "webpack-dev-server --env.local --progress --hot --open",
-    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start:prod": "node server/server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "seed": "node server/scripts/seedDB.js && node server/scripts/seedAssociations.js",
+    "seed2": "node server/scripts/seedAssociations.js",
+    "install": "cd client && yarn install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
+  },
+  "engines": {
+    "node": "8.9.4",
+    "npm": "5.6.x",
+    "yarn": "1.4.0"
   }
 }
