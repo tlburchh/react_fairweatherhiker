@@ -53,11 +53,11 @@ class Main extends Component  {
       console.log("trail name res: ", res.name);
       this.setState({savedTrails: res})
     }).catch(err => console.log(err));
-  }
+  };
   
   handleTrailSelection = (event) =>{
     this.setState({selectedTrail: event.target})
-    console.log('selected trail:', this.state.selectedTrail)
+    console.log('selected trail:', this.state.selectedTrail.innerHTML)
     console.log('trail data main: ', this.state)
 }
 

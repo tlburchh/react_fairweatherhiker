@@ -17,7 +17,7 @@ class TrailInfo extends Component {
 
   render() {
 // console.log('Trail Props')
-console.log('Selected Trail: ' + this.props.selectedTrail)
+// console.log('Selected Trail: ' + this.props.selectedTrail)
     return(
       <div>
        
