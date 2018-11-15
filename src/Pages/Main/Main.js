@@ -27,10 +27,12 @@ class Main extends Component  {
       data: [],
       selectedTrail: {},
       // traildata: [],
+      savedTrails: [],
     }
+    console.log("saved trails: ", this.state.savedTrails)
   }
   
-  //load saved trails
+  //load available trails from Hiking API
   loadTrails = (latitude, longitude) => {
     API.searchTrails(latitude, longitude)
     .then(res => {
@@ -42,11 +44,21 @@ class Main extends Component  {
     )
     .catch(err => console.log(err));
   };
+//get saved trails
+
+  getTrails = () => {
+    API.getTrails()
+    .then(res => {
+
+      console.log("trail name res: ", res.name);
+      this.setState({savedTrails: res})
+    }).catch(err => console.log(err));
+  }
   
   handleTrailSelection = (event) =>{
     this.setState({selectedTrail: event.target})
     console.log('selected trail:', this.state.selectedTrail)
-    console.log('trail data main: ' + this.state)
+    console.log('trail data main: ', this.state)
 }
 
   render() {
@@ -66,7 +78,7 @@ class Main extends Component  {
        
         <Grid style={{paddingTop: 30}} item xs={12} sm={6}>
           <Paper className={classes.paper}>
-          <TrailInfo data= {this.state.data} />
+          <TrailInfo data= {this.state.data} getTrails={this.getTrails}/>
           </Paper>
         </Grid>
       </Grid>

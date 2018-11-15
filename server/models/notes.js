@@ -18,3 +18,4 @@ const noteSchema = new Schema ({
         trim: true,
  
     },
+});

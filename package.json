@@ -20,11 +20,11 @@
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "if-env": "^1.0.4",
-    "mongoose": "^5.3.4",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.3.11",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "lodash": "^4.17.11",
     "react": "16.3.2",
     "react-dom": "16.3.2",
     "react-map-gl": "3.2.10",
@@ -59,8 +59,8 @@
     "heroku-postbuild": "npm run build"
   },
   "engines": {
-    "node": "8.9.4",
+    "node": "8.11.1",
     "npm": "5.6.x",
-    "yarn": "1.4.0"
+    "yarn": "1.10.1"
   }
 }

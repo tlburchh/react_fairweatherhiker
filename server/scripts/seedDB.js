@@ -5,7 +5,7 @@ const db = require("../models");
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Hiker", { useNewUrlParser: true });
 
-  const trailSeed = [
+  const trailsSeed = [
     {
       id: 7010450,
       name: "Laurel Bluffs Trail",
@@ -23,7 +23,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Hiker", { useNe
     }
   ];
 
-  const noteSeed = [
+  const notesSeed = [
     {
       name: 'note name',
       note: 'I am a note'
@@ -34,11 +34,13 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Hiker", { useNe
 db.Trails.deleteMany({}).then(
   db.Trails.insertMany(trailsSeed).then(resp => {
     console.log("Added trails: " + resp);
-    ).catch(err => {
+  }).catch(err => {
       console.log("Error inserting trails");
-
-db.Notes.deleteMany({}).then(
-  db.Notes.insertMany(notesSeed).then(resp => {
-    console.log("Added notes: " + resp);
-    ).catch(err => {
-      console.log("Error inserting notes");
+  }))
+//   ,
+// db.Notes.deleteMany({}).then(
+//   db.Notes.insertMany(notesSeed).then(resp => {
+//     console.log("Added notes: " + resp);
+//   }).catch(err => {
+//       console.log("Error inserting notes");
+//   }))
