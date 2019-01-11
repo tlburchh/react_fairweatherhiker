@@ -60,6 +60,11 @@ class Main extends Component  {
     console.log('selected trail:', this.state.selectedTrail.innerHTML)
     console.log('trail data main: ', this.state)
 }
+singleTrailSelection = () =>{
+  const singleTrailData = (this.state.data.name).filter(trail => trail.name === this.state.selectedTrail.innerHTML);
+  console.log('singletraildata: ', singleTrailData);
+
+}
 
   render() {
     const { classes } = this.props;
